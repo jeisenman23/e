@@ -29,15 +29,7 @@ $( document ).ready(function() {
 	$('#scenario').on('change', function() {
 		get_scenario_configuration();
 	});
-
-	$('#master-settings').on('click', function() {
-		$('.master-btn').addClass('hide')
-		$('#master-save').removeClass('hide')
-		$('#master-cancel').removeClass('hide')
-		$('#form_scenario_settings').removeClass('hide')
-		$('#scenario_configuration').addClass('hide')
-	});
-
+    
 	$('#master-save').on('click', function() {
         $('.master-btn').addClass('hide')
         $('#master-settings').removeClass('hide');
@@ -45,6 +37,15 @@ $( document ).ready(function() {
         $('#scenario_configuration').removeClass('hide')
         save_scenario_settings();
 	});
+
+	$('#modal-save').on('click', function() {
+        $('.master-btn').addClass('hide')
+        $('#master-settings').removeClass('hide');
+        $('#form_scenario_settings').addClass('hide');
+        $('#scenario_configuration').removeClass('hide')
+        save_scenario_settings();
+	});
+
 
     $('#scenario_description, #scenario_name').on('change keyup paste', function () {
         $('#master-save').removeClass('hide');
@@ -56,6 +57,11 @@ $( document ).ready(function() {
 	});
 
 	$('#master-cancel').on('click', function() {
+		var model_uuid = $('#header').data('model_uuid');
+		window.location = '/' + model_uuid + '/scenarios/';
+	});
+
+	$('#modal-cancel').on('click', function() {
 		var model_uuid = $('#header').data('model_uuid');
 		window.location = '/' + model_uuid + '/scenarios/';
 	});
@@ -77,7 +83,6 @@ function save_scenario_settings() {
 	var model_uuid = $('#header').data('model_uuid'),
 		scenario_id = $("#scenario option:selected").data('id')
 		form_data = $("#form_scenario_settings :input").serializeJSON();
-
 	$.ajax({
 		url: '/' + LANGUAGE_CODE + '/api/update_scenario/',
 		type: 'POST',
@@ -95,7 +100,6 @@ function save_scenario_settings() {
 			location.reload();
 		}
 	});
-
 }
 
 function get_scenario_configuration() {
@@ -196,7 +200,7 @@ function get_scenario_configuration() {
 	} else {
 		$('.viz-spinner').hide();
 		$('#map').remove();
-		$('#scenario_configuration').html('<div class="col-12 text-center"><br/><br/><h4>Select or create a scenario above!</h4></div>');
+		// $('#scenario_configuration').html('<div class="col-12 text-center"><br/><br/><h4>Select or create a scenario above!</h4></div>');
 	};
 };
 
