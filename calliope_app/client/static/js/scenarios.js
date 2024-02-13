@@ -11,7 +11,7 @@ var bulk_confirmation = false,
       "demand_share_per_timestep_decision", "carrier_prod_share_min", "carrier_prod_share_max",
        "carrier_prod_share_equals", "carrier_prod_share_per_timestep_min", "carrier_prod_share_per_timestep_max",
         "carrier_prod_share_per_timestep_equals", "net_import_share_min", "net_import_share_max",
-         "net_import_share_equals", "carrier_prod_min", "carrier_prod_max", "carrier_prod_equals", 
+         "net_import_share_equals", "carrier_prod_min", "carrier_prod_max", "carrier_prod_equals",
          "carrier_con_min", "carrier_con_max", "carrier_con_equals", "cost_max", "cost_min",
        "cost_equals", "cost_var_max", "cost_var_min", "cost_var_equals", "cost_investment_max",
     "cost_investment_min", "cost_investment_equals", "energy_cap_share_min", "energy_cap_share_max",
@@ -29,7 +29,16 @@ $( document ).ready(function() {
 	$('#scenario').on('change', function() {
 		get_scenario_configuration();
 	});
-    
+
+    $('#modal-scenario-settings').on('click', function() {
+		$('#pvwatts_form').hide();
+        $('#wtk_form').hide();
+		$('#scenario_constraints_json_form').hide();
+        $('#scenario_weights_json_form').hide();
+        $('#modal_scenario_settings').show();
+		$("#data-source-modal").css('display', "block");
+	});
+
 	$('#master-save').on('click', function() {
         $('.master-btn').addClass('hide')
         $('#master-settings').removeClass('hide');
@@ -289,7 +298,7 @@ function updateDialogObject() {
                     }
                 } else {
                     dialogObj[constraint][fieldKey] = value;
-                } 
+                }
             }
         });
     });
@@ -584,6 +593,7 @@ function activate_scenario_settings() {
 		$('#pvwatts_form').hide();
         $('#wtk_form').hide();
 		$('#scenario_constraints_json_form').hide();
+        $('#modal_scenario_settings').hide();
         $('#scenario_weights_json_form').show();
 		$("#data-source-modal").css('display', "block");
 
@@ -606,6 +616,7 @@ function activate_scenario_settings() {
 		$('#pvwatts_form').hide();
         $('#wtk_form').hide();
         $('#scenario_weights_json_form').hide();
+        $('#modal_scenario_settings').hide();
 		$('#scenario_constraints_json_form').show();
 		$("#data-source-modal").css('display', "block");
 
@@ -724,7 +735,13 @@ function activate_scenario_settings() {
     $('#settings_import_data').on('click', function() {
         updateDialogObject();
         $('textarea[name="edit' + dialogInputId + '"]').text(JSON.stringify(dialogObj, undefined, 2));
-        $('#data-source-modal').hide();
+        $('#scenario_constraints_json_form').hide();
+        $('#modal_scenario_settings').show();
+	});
+
+    $('#settings_import_cancel').on('click', function() {
+        $('#scenario_constraints_json_form').hide();
+        $('#modal_scenario_settings').show();
 	});
 
     $('#settings_weights_import_data').on('click', function() {
@@ -735,7 +752,10 @@ function activate_scenario_settings() {
         dialogObj["co2e"] = $("#co2e").val();
 
         $('textarea[name="edit' + dialogInputId + '"]').text(JSON.stringify(dialogObj, undefined, 2));
-        $('#data-source-modal').hide();
+        $('#scenario_weights_json_form').hide();
+        $('#modal_scenario_settings').show();
+
+        // $('#data-source-modal').hide();
 	});
 
     $('.group-constraints-close, .weights-close').on('click', function() {
@@ -751,7 +771,6 @@ function activate_scenario_settings() {
             $('#new_group_constraint_btn').attr("disabled", true);
         }
     });
-
 }
 
 function filter_nodes() {

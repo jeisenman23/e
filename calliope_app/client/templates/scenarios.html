@@ -65,29 +65,11 @@
       <div id="left-panel" class="left-panel">
         {% include "scenarios_details.html" %}
         <div style="padding-left:15px;">
-          <button id="master-settings" type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#settingsModal">
+          <button id="modal-scenario-settings" type="button" class="btn btn-sm btn-warning"  data-target="#modal_scenario_settings">
             {% trans "Settings" %}
           </button>
         </div>
-        
-        <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModal" aria-hidden="true" style="z-index: 10000;">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content" style="position: center;">
-            <div class="modal-header">
-                      <h5 class="modal-title" id="settingsModal" style="padding-left:30px;">Model Settings</h5>
-              </div>
-              <div class="modal-body" class="modal-body">
-                <div style="width: 100%;" id="scenario_settings">
-                  <div style="color:red" class="col-12 centered"><br>{% trans "Oops, an error occurred" %}.<br><br></div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button id="modal-cancel" type="button" style="border: 1px solid black;margin-right:1em;" class="btn weights-close" data-dismiss="modal">Cancel</button>
-                <button id="modal-save" type="button" class="btn btn-primary btn-warning">Save Changes</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- {% include } -->
 				{% if model %}
 				{% endif %}
       </div>
