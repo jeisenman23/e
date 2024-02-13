@@ -64,7 +64,6 @@
       <!-- Scenario -->
       <div id="left-panel" class="left-panel">
         {% include "scenarios_details.html" %}
-        <!-- https://getbootstrap.com/docs/4.0/components/modal/ take out in PR -->
         <div style="padding-left:15px;">
           <button id="master-settings" type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#settingsModal">
             {% trans "Settings" %}
@@ -76,9 +75,6 @@
           <div class="modal-content" style="position: center;">
             <div class="modal-header">
                       <h5 class="modal-title" id="settingsModal" style="padding-left:30px;">Model Settings</h5>
-                <button type="button" id="modal-cancel" class="close btn-warning" style="color: #ffffff;" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
               </div>
               <div class="modal-body" class="modal-body">
                 <div style="width: 100%;" id="scenario_settings">
