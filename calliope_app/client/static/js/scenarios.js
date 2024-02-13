@@ -200,6 +200,8 @@ function get_scenario_configuration() {
 
 				$('#scenario-delete').on('click', function() {
 					var model_uuid = $('#header').data('model_uuid'),
+                    // Here is tto change
+                    
 						scenario_id = $("#scenario option:selected").data('id');
 					var confirmation = confirm('This will remove all configurations and runs for this scenario.\nAre you sure you want to delete?');
 					if (confirmation) {
@@ -605,15 +607,7 @@ function activate_scenario_settings() {
         $('#wtk_form').hide();
         $('#scenario_weights_json_form').hide();
 		$('#scenario_constraints_json_form').show();
-		$("#data-source-modal").css({
-        position: 'fixed', // or 'absolute' if you want it to scroll with the page
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0,0,0,0.5)', // semi-transparent overlay
-        zIndex: 9999 // high z-index to ensure it's on top of other content
-        });
+		$("#data-source-modal").css('display', "block");
 
         // Get dialog data
         dialogInputId = this.name.slice(6);
