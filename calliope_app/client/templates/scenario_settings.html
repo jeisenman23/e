@@ -6,11 +6,6 @@
 
 	<table id="settings_table" class="table table-hover table-sm">
 		<tbody>
-			{% for p in parameters %}
-				{{ p.run_parameter.pretty_name }}
-			{% endfor %}
-
-
 			{% for param in parameters %}
 
 				{% if param.run_parameter.can_evolve %}
@@ -53,7 +48,6 @@
 							{% endif %}
 							<input {% if not can_edit %}disabled{% endif %} style="display: none" class="check_delete" type="checkbox" name="delete[{{ param.id }}]">
 						</td>
-
                         <!-- Scenarios settings run parameter ids hardcoded for modals id = 25 is the group constraints modal --> 
                         {% if param.run_parameter.id == 25 %}
                             <td> 
@@ -63,7 +57,6 @@
                             <td></td>
                         {% endif %}
 					</tr>
-
 					{% ifchanged param.run_parameter.pretty_name %}
 						<!-- Parameter ADD Row For Evolving Parameters -->
 						<tr class="param_header_add table-warning" data-param_id="{{ param.run_parameter.id }}" style="display: none" >
@@ -72,7 +65,6 @@
 							<td>
 								<input {% if not can_edit %}disabled{% endif %} type="number" class="form-control add-run-parameter-year" placeholder="YYYY" name="add[{{ param.run_parameter_id }}][years][]">
 							</td>
-
 							<!-- Parameter Values -->
 							<td colspan=2 class="head_value centered" data-param_id="{{ param.run_parameter.id }}">
 								{% if param.run_parameter.choices %}

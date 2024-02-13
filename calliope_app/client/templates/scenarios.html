@@ -1,3 +1,4 @@
+<!-- Reminder to translate all the changes -->
 {% extends 'configure.html' %}
 {% load static %}
 {% load i18n %}
@@ -47,13 +48,6 @@
     .my-specific-div {
       box-sizing: content-box;
     }
-    .b {
-        user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        -o-user-select: none;
-    }
 </style>
 {% endblock %}
 
@@ -72,32 +66,28 @@
         {% include "scenarios_details.html" %}
         <!-- https://getbootstrap.com/docs/4.0/components/modal/ take out in PR -->
         <div style="padding-left:15px;">
-          <!-- <button id="save-details" type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#settingsModal">
-            Save Details
-          </button> -->
-
           <button id="master-settings" type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#settingsModal">
             {% trans "Settings" %}
           </button>
         </div>
-      <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModal" aria-hidden="true" style="width: 1000px;">
+        
+        <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModal" aria-hidden="true" style="z-index: 10000;">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
+          <div class="modal-content" style="position: center;">
             <div class="modal-header">
-                      <h5 class="modal-title" id="settingsModal">Model Settings</h5>
-                <button type="button" id="modal-cancel" class="close btn-warning" style="color: #dc3545;" data-dismiss="modal" aria-label="Close">
+                      <h5 class="modal-title" id="settingsModal" style="padding-left:30px;">Model Settings</h5>
+                <button type="button" id="modal-cancel" class="close btn-warning" style="color: #ffffff;" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
-                <!-- This is where the form should be -->
+              <div class="modal-body" class="modal-body">
                 <div style="width: 100%;" id="scenario_settings">
                   <div style="color:red" class="col-12 centered"><br>{% trans "Oops, an error occurred" %}.<br><br></div>
                 </div>
               </div>
               <div class="modal-footer">
-                <button id="modal-cancel" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button id="modal-cancel" type="button" class="btn btn-primary btn-warning">Save changes</button>
+                <button id="modal-cancel" type="button" style="border: 1px solid black;margin-right:1em;" class="btn weights-close" data-dismiss="modal">Cancel</button>
+                <button id="modal-save" type="button" class="btn btn-primary btn-warning">Save Changes</button>
               </div>
             </div>
           </div>

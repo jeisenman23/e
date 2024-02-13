@@ -43,7 +43,7 @@ $( document ).ready(function() {
         $('#master-settings').removeClass('hide');
         $('#form_scenario_settings').addClass('hide');
         $('#scenario_configuration').removeClass('hide')
-        save_scenario_settings();
+        save_modal_scenario_settings();
 	});
 
 
@@ -101,6 +101,31 @@ function save_scenario_settings() {
 		}
 	});
 }
+
+function save_modal_scenario_settings() {
+
+	var model_uuid = $('#header').data('model_uuid'),
+		scenario_id = $("#scenario option:selected").data('id')
+		form_data = $("#scenario_settings :input").serializeJSON();
+	$.ajax({
+		url: '/' + LANGUAGE_CODE + '/api/update_scenario/',
+		type: 'POST',
+		data: {
+			'model_uuid': model_uuid,
+			'scenario_id': scenario_id,
+			'description' : $('#scenario_description').val(),
+            'name' :$('#scenario_name').val(),
+			'form_data': JSON.stringify(form_data),
+			'csrfmiddlewaretoken': getCookie('csrftoken'),
+		},
+		dataType: 'json',
+		success: function (data) {
+			window.onbeforeunload = null;
+			location.reload();
+		}
+	});
+}
+
 
 function get_scenario_configuration() {
 	$('.viz-spinner').show();
@@ -580,7 +605,15 @@ function activate_scenario_settings() {
         $('#wtk_form').hide();
         $('#scenario_weights_json_form').hide();
 		$('#scenario_constraints_json_form').show();
-		$("#data-source-modal").css('display', "block");
+		$("#data-source-modal").css({
+        position: 'fixed', // or 'absolute' if you want it to scroll with the page
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0,0,0,0.5)', // semi-transparent overlay
+        zIndex: 9999 // high z-index to ensure it's on top of other content
+        });
 
         // Get dialog data
         dialogInputId = this.name.slice(6);
